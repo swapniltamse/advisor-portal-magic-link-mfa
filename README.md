@@ -67,8 +67,3 @@ We will investigate and implement the following solutions to address the passwor
 * Explore other advanced authentication methods, such as biometric authentication.
 * Implement detailed logging and monitoring of the password reset process.
 
-## Contact
-
-For any questions or issues, please contact:
-
-[Your Name/Team Email]
