@@ -1,0 +1,63 @@
+service: insurance-advisor-auth
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    USERS_TABLE: ${self:service}-${self:provider.stage}-users
+    NODE_ENV: ${self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - !GetAtt UsersTable.Arn
+            - !Join ['/', [!GetAtt UsersTable.Arn, 'index', 'EmailIndex']]
+            - !Join ['/', [!GetAtt UsersTable.Arn, 'index', 'TokenIndex']]
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - httpApi: '*'
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${self:provider.stage}-users
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: advisorId
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+          - AttributeName: resetToken
+            AttributeType: S
+        KeySchema:
+          - AttributeName: advisorId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: EmailIndex
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          - IndexName: TokenIndex
+            KeySchema:
+              - AttributeName: resetToken
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
