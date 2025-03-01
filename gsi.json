@@ -1,0 +1,34 @@
+[
+  {
+    "IndexName": "EmailIndex",
+    "KeySchema": [
+      {
+        "AttributeName": "email",
+        "KeyType": "HASH"
+      }
+    ],
+    "Projection": {
+      "ProjectionType": "ALL"
+    },
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+  },
+  {
+    "IndexName": "TokenIndex",
+    "KeySchema": [
+      {
+        "AttributeName": "resetToken",
+        "KeyType": "HASH"
+      }
+    ],
+    "Projection": {
+      "ProjectionType": "ALL"
+    },
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+  }
+]

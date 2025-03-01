@@ -10,7 +10,7 @@ AWS.config.update({
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // Table name - read from environment variable
-const USERS_TABLE = process.env.USERS_TABLE || "insurance-advisors-login-help-db";
+const USERS_TABLE = process.env.USERS_TABLE || "insurance-advisors-dev";
 
 // Helper functions for common DynamoDB operations
 const dynamoDbHelpers = {
