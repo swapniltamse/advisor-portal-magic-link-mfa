@@ -1,6 +1,5 @@
-// src/api/resetPassword.js
-const jwt = require("jsonwebtoken");
 const { getUserByToken, updatePassword } = require("../lib/dynamodb");
+const { hashPassword, generateToken } = require("../lib/auth");
 
 const resetPassword = async (req, res) => {
   try {
@@ -27,18 +26,14 @@ const resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
 
-    // In a real application, hash the password before storing
-    // const hashedPassword = await bcrypt.hash(newPassword, 10);
-    // For the POC, we'll just store the plain password
-    await updatePassword(user.advisorId, newPassword);
+    // Hash the password before storing
+    const hashedPassword = await hashPassword(newPassword);
+
+    // Update the user's password and clear the reset token
+    await updatePassword(user.advisorId, hashedPassword);
 
     // Generate JWT for authentication
-    const jwtSecret = process.env.JWT_SECRET;
-    const authToken = jwt.sign(
-      { userId: user.advisorId, email: user.email },
-      jwtSecret,
-      { expiresIn: "1h" }
-    );
+    const authToken = generateToken(user);
 
     res.status(200).json({
       message: "Password reset successful",

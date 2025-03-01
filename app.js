@@ -45,4 +45,7 @@ if (require.main === module) {
   });
 }
 
+// Error handling middleware
+app.use(errorHandler);
+
 module.exports = app;
