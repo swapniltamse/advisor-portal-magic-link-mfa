@@ -7,6 +7,7 @@ const path = require("path");
 const requestReset = require("./src/api/requestReset");
 const verifyToken = require("./src/api/verifyToken");
 const resetPassword = require("./src/api/resetPassword");
+const setupTestUsers = require("./src/api/setup");
 
 // Create Express app
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.static("public"));
 app.post("/api/request-reset", requestReset);
 app.get("/api/verify-token/:token", verifyToken);
 app.post("/api/reset-password", resetPassword);
+app.get("/api/setup", setupTestUsers);
 
 // Simple health check endpoint
 app.get("/api/health", (req, res) => {
