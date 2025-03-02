@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const errorHandler = require("./src/middleware/errorHandler");
+require("dotenv").config();
 
 // Import API handlers
 const requestReset = require("./src/api/requestReset");
