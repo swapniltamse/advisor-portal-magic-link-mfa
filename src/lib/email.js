@@ -1,11 +1,11 @@
-// src/lib/email.js
 const nodemailer = require("nodemailer");
 
 // Configure email transporter
 const createTransporter = () => {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.mailtrap.io",
-    port: process.env.SMTP_PORT || 2525,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT || 587,
+    secure: process.env.SMTP_PORT === "465",
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -31,6 +31,13 @@ const sendPasswordResetEmail = async (user, resetUrl) => {
 
   return transporter.sendMail(mailOptions);
 };
+
+console.log("SMTP Config:", {
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  user: process.env.SMTP_USER,
+  passLength: process.env.SMTP_PASS ? process.env.SMTP_PASS.length : 0,
+});
 
 module.exports = {
   sendPasswordResetEmail,
