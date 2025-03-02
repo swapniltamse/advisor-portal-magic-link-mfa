@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="advisor-auth">
+    <Description>API for insurance advisor authentication</Description>
+</APIProxy>

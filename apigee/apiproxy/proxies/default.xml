@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow>
+        <Request>
+            <Step>
+                <Name>RateLimiting</Name>
+            </Step>
+        </Request>
+    </PreFlow>
+    <HTTPProxyConnection>
+        <BasePath>/v1/auth</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

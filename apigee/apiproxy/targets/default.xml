@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <HTTPTargetConnection>
+        <URL>https://YOUR-API-GATEWAY-URL.execute-api.us-east-1.amazonaws.com/dev</URL>
+    </HTTPTargetConnection>
+</TargetEndpoint>
