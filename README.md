@@ -15,6 +15,9 @@ This is impacting their ability to access the portal efficiently.
 
 We will investigate and implement the following solutions to address the password reset issue:
 
+![image](https://github.com/user-attachments/assets/ff61f570-f344-4d1e-9b91-034f9ac33a2d)
+
+
 * **Multi-Factor Authentication (MFA):**
     * Implement MFA to add an extra layer of security during the password reset process.
     * Explore options such as SMS verification, email verification, or authenticator app integration.
